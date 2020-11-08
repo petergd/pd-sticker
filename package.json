@@ -1,6 +1,6 @@
 {
   "name": "pd-sticker",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A custom web component that can be used in web applications or websites. It provides a set of side-sticker elements that have a fixed position during scroll.",
   "main": "pd-sticker.js",
   "scripts": {

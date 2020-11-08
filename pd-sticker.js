@@ -124,7 +124,6 @@ export class pdSticker extends HTMLElement {
       self.sRoot.append(div);
       let sticker = self.sRoot.querySelector("#sticker-" + id);
       scroll_distance[index] = item.offsetHeight - sticker.offsetHeight;
-	  console.log(scroll_distance[index],initialOffsetTop,initialOffsetLeft,item.offsetLeft);
       if (!self.isEmpty(item.hasChildNodes())) {
         let children = item.childNodes;		
         if (children.length > 1) {
