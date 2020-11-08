@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>HTML5 Test Page</title>
+		<meta name="description" content="HTML5 Custom Web Element Test Page">
+		<meta name="author" content="Peter Darmis">
+		<style>
+			html, body {
+			height: 100%;
+			scroll-snap-type: y mandatory;
+			scroll-behavior: smooth;
+			-webkit-overflow-scrolling: touch;
+			overscroll-behavior: contain;			
+			}
+			:host {
+			display: block;
+			}
+			.main {
+				width: 60%;
+				margin: 0 auto;
+			}
+			article {
+			  scroll-snap-align: center;
+			  font-size: 1.25rem;
+			  width: 92%;
+			  height: auto;
+			  margin: 0 auto;
+			  padding: 0.5rem;
+			  text-align: justify;			  
+			  display: flex;		  
+			  flex-direction: column;
+			}
+			article * {
+				display: block;
+				width: 100%;	
+				flex-grow: 1;
+				left: 4%;
+			}
+			pd-sticker:not(:defined) {
+			  display: none;
+			}
+			pd-sticker,
+			pd-sticker:defined {
+			  font-size: 1.5rem;
+			  display: block;
+			  height: 100%;
+			  padding: 0 0.5rem 0 0.5rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="main" title="solo example">
+		  <article title="My title" id="mytitle"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. </article>
+		  <article title="<p>go for it</p>My next title"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. </article>
+		  <article data-img="https://picsum.photos/48/48"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		  <article data-img="https://picsum.photos/48/48"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		  <article title="another title"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		  <article data-button="pd-indicator-switch,pd-indicator-heart,pd-indicator-circle,pd-indicator-octastar,pd-indicator-yin-yang" title="some buttons"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		  <article data-link="google.gr" data-img="https://picsum.photos/48/48"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		  <article title="next article has no title"> <img src="https://picsum.photos/248/188" />
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </p>
+		  </article>
+		  <article title="a link to google" data-link="google.gr"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		  <article title="last title"> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus vel turpis in lorem lobortis mattis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris id vestibulum velit, ut consequat odio. Curabitur non erat velit. Pellentesque dolor libero, auctor id scelerisque nec, sollicitudin quis sapien. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut venenatis risus eu ligula aliquam, quis vestibulum nisi rhoncus. Morbi condimentum consectetur libero sit amet semper. Suspendisse potenti. Fusce pellentesque massa sed felis consectetur aliquam. Vestibulum dolor mi, mattis gravida iaculis nec, volutpat sit amet odio. Cras auctor mauris nibh, et vestibulum velit placerat at. Sed non lacus at sapien euismod sollicitudin. Cras accumsan condimentum gravida. Integer eget sagittis ligula. Cras ullamcorper interdum augue, non blandit augue rutrum in. Donec varius dolor magna, sollicitudin scelerisque odio tempor at. Suspendisse potenti. Donec in sollicitudin lorem, eu laoreet diam. Aenean non tincidunt risus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a massa quis sem mollis lacinia at nec mi. Nunc vulputate orci sed tincidunt mattis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. </article>
+		</div>
+		<pd-sticker direction="left" search-for="article">
+		<span slot="sticker-0">a regular button <button>click me</button></span>
+		<span slot="sticker-3">a regular button <button>click me</button></span>
+		<span slot="sticker-4"><ol style="text-align: left"><li>one</li><li>two</li><li>three</li></ol></span>
+		</pd-sticker>
+		<script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+		<script type="module" src="node_modules/pd-indicator/pd-indicator.js"></script>
+		<script type="module" src="pd-sticker.js"></script>
+	</body>
+</html>
