@@ -19,7 +19,7 @@ export class pdSticker extends HTMLElement {
     if (regex.test(button)) {
       let type = button.replace("pd-indicator-", "");
       if (['moon', 'yin-yang', 'pointer', 'rectangle', 'circle', 'pacman', 'octastar', 'infinity', 'heart', 'switch', 'donut'].includes(type)) {
-		if (!window.customElements.get('pd-indicator')) {
+		if (window.customElements.get('pd-indicator')) {
 			let indicator = new pdIndicator();
 			indicator.setAttribute('type', type);
 			div.appendChild(indicator);
