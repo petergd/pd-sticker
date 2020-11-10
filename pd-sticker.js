@@ -33,10 +33,10 @@ export class pdSticker extends HTMLElement {
     let items = document.querySelectorAll(self.searchFor);
 	self.sRoot.querySelectorAll("div.sticker").forEach((sticker, index) => {
 		if (self.direction == 'right') {
-		sticker.style.left = (100*(window.innerWidth - (items[index].offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
+			sticker.style.left = (100*(window.innerWidth - (items[index].offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
 		} else {
-		sticker.style.left = (100*(initialOffsetLeft - 2*items[index].offsetLeft)/window.outerWidth) + '%';
-		}	  
+			sticker.style.left = (100*(initialOffsetLeft + parseFloat(window.getComputedStyle(items[index], null).getPropertyValue("padding-left")) - parseFloat(window.getComputedStyle(sticker, null).getPropertyValue("width")))/window.innerWidth) + '%';
+		}	
 	});
   }
  
@@ -61,7 +61,7 @@ export class pdSticker extends HTMLElement {
     }
 	if (self.isEmpty(self.sRoot.querySelector("style"))) {
 		let style = document.createElement("style");
-		style.innerHTML = "pd-indicator, a, button { cursor: pointer; } .sticker img { padding-left: 1.4rem; } .sticker img, .sticker video { width: 3rem; height: auto; } .sticker { font-size: 2vmin; } .note { text-decoration: none; background: #ffc; box-shadow: .375rem .375rem .5rem rgba(33,33,33,.7); } .note.rotatedLeft { transform: rotate(-6deg); } .note.rotatedRight { transform: rotate(6deg); } .speech-bubble-left, .speech-bubble-right { backdrop-filter: blur(0.25rem); background: rgba(4, 17, 32, 1); box-shadow: .375rem .375rem .5rem rgba(33,33,33,.7); border-radius: .5rem } .speech-bubble-left:before { content: \"\"; position: absolute; right: 100%; top: 1.5rem; width: 0; height: 0; border-top: .5rem solid transparent; border-right: 1rem solid rgba(4, 17, 32, 1); border-bottom: .5rem solid transparent; }  .speech-bubble-right:after { content: \"\"; position: absolute; left: 100%; top: 1.5rem; width: 0; height: 0; border-top: .5rem solid transparent; border-left: 1rem solid rgba(4, 17, 32, 1); border-bottom: .5rem solid transparent; }.speech-bubble-left, .speech-bubble-left *, .speech-bubble-right, .speech-bubble-right * { color: #ffffff; } .black-box { color: #ffffff; padding: .125rem; list-style: none; box-shadow: .375rem .375rem .5rem rgba(33,33,33,.7); background: rgba(4, 18, 27, 0.88); border-radius: .25rem; } .speech-bubble-left, .speech-bubble-right, .black-box { padding: 0.5rem; }";
+		style.innerHTML = "pd-indicator, a, button { cursor: pointer; } .sticker img, .sticker video { width: 3rem; height: auto; } .sticker { font-size: 2vmin; } .note { text-decoration: none; background: #ffc; box-shadow: .375rem .375rem .5rem rgba(33,33,33,.7); } .note.rotatedLeft { transform: rotate(-6deg); } .note.rotatedRight { transform: rotate(6deg); } .speech-bubble-left, .speech-bubble-right { backdrop-filter: blur(0.25rem); background: rgba(4, 17, 32, 1); box-shadow: .375rem .375rem .5rem rgba(33,33,33,.7); border-radius: .5rem } .speech-bubble-left:before { content: \"\"; position: absolute; right: 100%; top: 1.5rem; width: 0; height: 0; border-top: .5rem solid transparent; border-right: 1rem solid rgba(4, 17, 32, 1); border-bottom: .5rem solid transparent; }  .speech-bubble-right:after { content: \"\"; position: absolute; left: 100%; top: 1.5rem; width: 0; height: 0; border-top: .5rem solid transparent; border-left: 1rem solid rgba(4, 17, 32, 1); border-bottom: .5rem solid transparent; }.speech-bubble-left, .speech-bubble-left *, .speech-bubble-right, .speech-bubble-right * { color: #ffffff; } .black-box { color: #ffffff; padding: .125rem; list-style: none; box-shadow: .375rem .375rem .5rem rgba(33,33,33,.7); background: rgba(4, 18, 27, 0.88); border-radius: .25rem; } .speech-bubble-left, .speech-bubble-right, .black-box { padding: 0.5rem; }";
 		self.sRoot.appendChild(style);
 	}
     document.querySelectorAll(self.searchFor).forEach((item, index) => { 
@@ -74,12 +74,12 @@ export class pdSticker extends HTMLElement {
 	  div.style.width = 'auto';
       div.style.minHeight = '5rem';
 	  div.style.height = 'auto';
-	  div.style.display = 'flex';
 	  div.style.textAlign = 'center';
 	  div.style.flexDirection = 'column';
 	  div.style.alignItems = 'center';
 	  div.style.alignContent = 'center';
 	  div.style.justifyContent = 'center';
+	  div.style.display = 'none';
       if (item.title) {
         let regex = /(<([^>]+)>)/ig;
         item.title = item.title.replace(regex, "");
@@ -112,17 +112,18 @@ export class pdSticker extends HTMLElement {
         }
       }
       div.style.position = "absolute";
-	  div.style.top = (initialOffsetTop/ 16) + 'rem';
-      if (self.direction == 'right') {
-		div.style.left = (100*(window.innerWidth - (item.offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
-      } else {
-		div.style.left = (100*(initialOffsetLeft - 2*item.offsetLeft)/window.outerWidth) + '%';
-      }
+	  div.style.top = (initialOffsetTop/ 16) + 'rem';      
 	  let slot = document.createElement("slot");
 	  slot.name = "sticker-"+index;
 	  div.append(slot);
       self.sRoot.append(div);
       let sticker = self.sRoot.querySelector("#sticker-" + id);
+	  sticker.style.display = 'flex';
+	  if (self.direction == 'right') {
+		sticker.style.left = (100*(window.innerWidth - (item.offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
+      } else {
+		sticker.style.left = (100*(initialOffsetLeft + parseFloat(window.getComputedStyle(item, null).getPropertyValue("padding-left")) - parseFloat(window.getComputedStyle(sticker, null).getPropertyValue("width")))/window.innerWidth) + '%';
+      }
       scroll_distance[index] = item.offsetHeight - sticker.offsetHeight;
       if (!self.isEmpty(item.hasChildNodes())) {
         let children = item.childNodes;		
