@@ -27,24 +27,31 @@ export class pdSticker extends HTMLElement {
       }
     }
   }
+  
   changeDirection() {
     let self = this;
-	let initialOffsetLeft = Math.max(document.querySelector(self.searchFor).parentElement.offsetLeft,document.querySelector(self.searchFor).offsetParent.offsetLeft);
+	let searchFor = document.querySelector(self.searchFor);
+	let initialOffsetTop = 2*Math.max(searchFor.parentElement.offsetTop,searchFor.offsetParent.offsetTop);
+	let initialOffsetLeft = Math.max(searchFor.parentElement.offsetLeft,searchFor.offsetParent.offsetLeft);
+	if(self.isEmpty(initialOffsetTop)) {
+	    initialOffsetTop = 0;
+	}
+	if(self.isEmpty(initialOffsetLeft)) {
+	    initialOffsetLeft = 0;
+	}
+	window.scrollTo(initialOffsetTop,400);
     let items = document.querySelectorAll(self.searchFor);
+	let scroll_distance = [];
 	self.sRoot.querySelectorAll("div.sticker").forEach((sticker, index) => {
-		if (self.direction == 'right') {
-			sticker.style.left = (100*(window.innerWidth - (items[index].offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
-		} else {
-			sticker.style.left = (100*(initialOffsetLeft + parseFloat(window.getComputedStyle(items[index], null).getPropertyValue("padding-left")) - parseFloat(window.getComputedStyle(sticker, null).getPropertyValue("width")))/window.innerWidth) + '%';
-		}	
+		self.applyPosition(sticker, items[index], index, scroll_distance, initialOffsetLeft, initialOffsetTop);
 	});
   }
- 
   
   init() {
     let self = this;
-	let initialOffsetTop = 2*Math.max(document.querySelector(self.searchFor).parentElement.offsetTop,document.querySelector(self.searchFor).offsetParent.offsetTop);
-	let initialOffsetLeft = Math.max(document.querySelector(self.searchFor).parentElement.offsetLeft,document.querySelector(self.searchFor).offsetParent.offsetLeft);
+	let searchFor = document.querySelector(self.searchFor);
+	let initialOffsetTop = 2*Math.max(searchFor.parentElement.offsetTop,searchFor.offsetParent.offsetTop);
+	let initialOffsetLeft = Math.max(searchFor.parentElement.offsetLeft,searchFor.offsetParent.offsetLeft);
 	if(self.isEmpty(initialOffsetTop)) {
 	    initialOffsetTop = 0;
 	}
@@ -119,32 +126,38 @@ export class pdSticker extends HTMLElement {
       self.sRoot.append(div);
       let sticker = self.sRoot.querySelector("#sticker-" + id);
 	  sticker.style.display = 'flex';
-	  if (self.direction == 'right') {
-		sticker.style.left = (100*(window.innerWidth - (item.offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
-      } else {
-		sticker.style.left = (100*(initialOffsetLeft + parseFloat(window.getComputedStyle(item, null).getPropertyValue("padding-left")) - parseFloat(window.getComputedStyle(sticker, null).getPropertyValue("width")))/window.innerWidth) + '%';
-      }
-      scroll_distance[index] = item.offsetHeight - sticker.offsetHeight;
-      if (!self.isEmpty(item.hasChildNodes())) {
-        let children = item.childNodes;		
-        if (children.length > 1) {
-          for (let i = 0; i < children.length; i++) {
-            if (!self.isEmpty(children[i].tagName)) {
-              children[i].addEventListener("load", (e) => {
-                scroll_distance[index] += !self.isEmpty(children[i].clientHeight) ? children[i].clientHeight - sticker.clientHeight : 0;
-                self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
-              });
-            }
-          }
-		  self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
-        } else {
-          self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
-        }
-      } else {
-        self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
-      }
+	  self.applyPosition(sticker, item, index, scroll_distance, initialOffsetLeft, initialOffsetTop);
     });
   }
+  
+  applyPosition(sticker, item, index, scroll_distance, initialOffsetLeft, initialOffsetTop) {
+	let self = this;
+	scroll_distance[index] = item.offsetHeight - sticker.offsetHeight;
+	if (self.direction == 'right') {
+		sticker.style.left = (100*(window.innerWidth - (item.offsetLeft + initialOffsetLeft)) / window.innerWidth) + '%';
+	} else {
+		sticker.style.left = (100*(initialOffsetLeft + parseFloat(window.getComputedStyle(item, null).getPropertyValue("padding-left")) - parseFloat(window.getComputedStyle(sticker, null).getPropertyValue("width")))/window.innerWidth) + '%';
+	}
+	if (!self.isEmpty(item.hasChildNodes())) {
+	let children = item.childNodes;		
+		if (children.length > 1) {
+		  for (let i = 0; i < children.length; i++) {
+			if (!self.isEmpty(children[i].tagName)) {
+			  children[i].addEventListener("load", (e) => {
+				scroll_distance[index] += !self.isEmpty(children[i].clientHeight) ? children[i].clientHeight - sticker.clientHeight : 0;
+				self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
+			  });
+			}
+		  }
+		  self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
+		} else {
+		  self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
+		}
+	} else {
+	self.duringScroll(sticker, item, scroll_distance[index], initialOffsetTop);
+	}
+  }
+  
   duringScroll(sticker, item, scroll_distance, initialOffsetTop = 0) {
 	let scroll = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function(callback) {
       window.setTimeout(callback, 1000 / 72)
@@ -165,6 +178,7 @@ export class pdSticker extends HTMLElement {
       });
     });
   }
+  
   isEmpty(value) {
     switch (true) {
       case (value == null || value == undefined):
@@ -183,6 +197,7 @@ export class pdSticker extends HTMLElement {
         return false;
     }
   }
+  
   connectedCallback() {
     let direction = this.getAttribute("direction");
     let searchFor = this.getAttribute("search-for");
@@ -192,13 +207,19 @@ export class pdSticker extends HTMLElement {
 	window.onresize = () =>	{
 		this.changeDirection(); 
 	}
+	window.onorientationchange = () =>	{
+		this.changeDirection(); 
+	}
   }
+  
   disconnectedCallback() {
     console.log('Disconnected.');
   }
+  
   adoptedCallback() {
     console.log('Adopted.');
   }
+  
   attributeChangedCallback(name, oldValue, newValue) {
     if (name == "direction") {
       let direction = this.getAttribute("direction");
@@ -210,6 +231,7 @@ export class pdSticker extends HTMLElement {
       this.searchFor = !this.isEmpty(searchFor) ? searchFor : 'article';
     }
   }
+  
 }
 
 if (!window.customElements.get('pd-sticker')) {
