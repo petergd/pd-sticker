@@ -3,7 +3,7 @@
 A custom web component that can be used in web applications or websites. It provides a set of side-sticker elements that have a fixed position during scroll. Ideal for multi text content such as news articles since it can create side-stickers holding text, images or video, buttons and links.
 [![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/pd-sticker)
 
-[Demo page (by unpkg.com)](https://unpkg.com/pd-sticker@1.0.6/pd-sticker.html)
+[Demo page (by unpkg.com)](https://unpkg.com/pd-sticker@1.0.7/pd-sticker.html)
 
 ## Getting Started
 
