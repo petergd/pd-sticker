@@ -1,10 +1,38 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: pd-sticker.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: pd-sticker.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
 * Creates sticker elements along-side pre-defined DOM element(s)
 *
 *
 * @extends HTMLElement
 * 
-* @author Peter G. Darmis <pdarmis@gmail.com>
+* @author Peter G. Darmis &lt;pdarmis@gmail.com>
 * @license MIT
 */
 export class pdSticker extends HTMLElement {
@@ -40,7 +68,7 @@ export class pdSticker extends HTMLElement {
   * e.g. data-button="pd-indicator-switch,pd-indicator-heart,pd-indicator-circle,pd-indicator-octastar,pd-indicator-yin-yang"
   *
   * @param {string} button - A comma separated list of pd-indicator styles.
-  * @param {HTMLDivElement} div - An HTML <div> element that the pd-indicator button will be placed.
+  * @param {HTMLDivElement} div - An HTML &lt;div> element that the pd-indicator button will be placed.
   * @return {void}
   */
   addIndicator(button, div) {
@@ -130,19 +158,19 @@ export class pdSticker extends HTMLElement {
 	  div.style.justifyContent = 'center';
 	  div.style.display = 'none';
       if (item.title) {
-        let regex = /(<([^>]+)>)/ig;
+        let regex = /(&lt;([^>]+)>)/ig;
         item.title = item.title.replace(regex, "");
         if (item.dataset.link) {
-          div.innerHTML = '<a href="' + item.dataset.link + '">' + item.title + '</a>';
+          div.innerHTML = '&lt;a href="' + item.dataset.link + '">' + item.title + '&lt;/a>';
         } else {
           div.innerHTML = item.title;
         }
       }
       if (item.dataset.img) {
         if (item.dataset.link) {
-          div.innerHTML = '<a href="' + item.dataset.link + '"><img src="' + item.dataset.img + '"/></a>';
+          div.innerHTML = '&lt;a href="' + item.dataset.link + '">&lt;img src="' + item.dataset.img + '"/>&lt;/a>';
         } else {
-          div.innerHTML = '<img src="' + item.dataset.img + '"/>';
+          div.innerHTML = '&lt;img src="' + item.dataset.img + '"/>';
         }
       }
       if (item.dataset.button) {
@@ -178,7 +206,7 @@ export class pdSticker extends HTMLElement {
   * All stickers will be created and displayed at the proper position. 
   * At the same time the scroll distance of each sticker will have been calculated. 
   *
-  * @param {HTMLDivElement} sticker - An <pd-sticker> HTML <div> sub-element that is the sticker object displayed at the front-end.
+  * @param {HTMLDivElement} sticker - An &lt;pd-sticker> HTML &lt;div> sub-element that is the sticker object displayed at the front-end.
   * @param {HTMLElement} item - An HTML element that the associated sticker object created by pd-sticker will be placed.
   * @param {number} index - The index of the item HTML element above.
   * @param {array} scroll_distance - An empty array that will be filled with the values of available scroll distance for each sticker object.
@@ -197,7 +225,7 @@ export class pdSticker extends HTMLElement {
 	if (!self.isEmpty(item.hasChildNodes())) {
 	let children = item.childNodes;		
 		if (children.length > 1) {
-		  for (let i = 0; i < children.length; i++) {
+		  for (let i = 0; i &lt; children.length; i++) {
 			if (!self.isEmpty(children[i].tagName)) {
 			  children[i].addEventListener("load", (e) => {
 				scroll_distance[index] += !self.isEmpty(children[i].clientHeight) ? children[i].clientHeight - sticker.clientHeight : 0;
@@ -219,7 +247,7 @@ export class pdSticker extends HTMLElement {
   * It helps on smoother animation of the stickers' movement while scrolling.
   * It also manages the behavior of each sticker. If it has an absolute position or fixed while scrolling. 
   *
-  * @param {HTMLDivElement} sticker - An <pd-sticker> HTML <div> sub-element that is the sticker object displayed at the front-end.
+  * @param {HTMLDivElement} sticker - An &lt;pd-sticker> HTML &lt;div> sub-element that is the sticker object displayed at the front-end.
   * @param {HTMLElement} item - An HTML element that the associated sticker object created by pd-sticker will be placed.
   * @param {array} scroll_distance - An array containing the values of available scroll distance for each sticker object.
   * @param {number} initialOffsetTop - The initial top offset of each sticker object.
@@ -231,7 +259,7 @@ export class pdSticker extends HTMLElement {
     };
     window.addEventListener("scroll", () => { 
       scroll(() => {
-        if (document.documentElement.scrollTop >= (item.offsetTop + initialOffsetTop) && document.documentElement.scrollTop <= (item.offsetTop + scroll_distance + initialOffsetTop)) {
+        if (document.documentElement.scrollTop >= (item.offsetTop + initialOffsetTop) &amp;&amp; document.documentElement.scrollTop &lt;= (item.offsetTop + scroll_distance + initialOffsetTop)) {
           sticker.style.position = 'fixed';
 		  sticker.style.top = '0.5rem';
         } else {
@@ -260,10 +288,10 @@ export class pdSticker extends HTMLElement {
       case (Array.isArray(value)):
         return value.length == 0;
       case (typeof value == 'object'):
-        return (Object.keys(value).length === 0 && value.constructor === Object);
+        return (Object.keys(value).length === 0 &amp;&amp; value.constructor === Object);
       case (typeof value == 'string'):
         return value.length == 0;
-      case (typeof value == 'number' && !isNaN(value)):
+      case (typeof value == 'number' &amp;&amp; !isNaN(value)):
         return value == 0;
       case (!value):
         return true;
@@ -337,3 +365,26 @@ if (!window.customElements.get('pd-sticker')) {
   window.pdSticker = pdSticker;
   window.customElements.define("pd-sticker", pdSticker);
 }
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="pdSticker.html">pdSticker</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 10 2020 21:47:41 GMT-0500 (Eastern Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
