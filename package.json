@@ -1,6 +1,6 @@
 {
   "name": "pd-sticker",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "A custom web component that can be used in web applications or websites. It provides a set of side-sticker elements that have a fixed position during scroll.",
   "main": "pd-sticker.js",
   "scripts": {
@@ -21,14 +21,15 @@
     "email": "pdarmis@gmail.com"
   },
   "author": "Peter Darmis",
+  "website": "https://petergd.github.io/pd-sticker/",
   "license": "MIT",
   "dependencies": {
-    "pd-indicator": "^1.1.7"
+    "pd-indicator": "^1.1.8"
   },
   "devDependencies": {
-    "chai": "^4.2.0",
-    "jasmine": "^3.6.1",
-    "karma": "^5.1.0",
+    "chai": "^4.3.4",
+    "jasmine": "^3.7.0",
+    "karma": "^6.3.2",
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^3.1.0",
     "karma-cli": "^2.0.0",
@@ -37,7 +38,6 @@
     "karma-firefox-launcher": "^1.2.0",
     "karma-jasmine": "^2.0.1",
     "karma-spec-reporter": "0.0.32",
-    "pd-indicator": "^1.0.8",
     "puppeteer": "^2.0.0"
   },
   "homepage": "https://github.com/petergd/pd-sticker#readme"
